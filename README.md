@@ -5,7 +5,7 @@
 
 ### IT CONSULTANT ♦ DEVELOPER ♦ SENIOR TECHNICAL ARCHITECT
 ***
-### _Over 25 years of successful programming and architecting software experience_
+### _25 years of successful programming and architecting software experience_
 ***
 ### Highly knowledgeable Programmer/Architect with extensive background in many different areas of software development. Fullstack as well as frontend. Expert Angular developer. Presented at a major Angular conference in 2022. Created popular blog content for ngrx state management
 ***
