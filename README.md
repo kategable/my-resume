@@ -1,7 +1,7 @@
 # KATE SKY
 
-| Buffalo Grove, IL | www.linkedin.com/in/katesky |
-| ------ | ------ | 
+| Buffalo Grove, IL | [LinkedIn](www.linkedin.com/in/katesky) | [LinkTree](https://linktr.ee/Katesky)|
+| ------ | ------ |-------|
 
 ### IT CONSULTANT ♦ DEVELOPER ♦ SENIOR TECHNICAL ARCHITECT
 ***
