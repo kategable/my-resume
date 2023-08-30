@@ -13,3 +13,10 @@ Computational Cache for Building Artifacts: Nx provides caching mechanisms that 
 Better Developer Experience: Nx workspace tools offer features like code generation, code linting, testing, and more, all integrated within the monorepo setup. This comprehensive tooling enhances the overall developer experience and makes it easier to manage and develop different parts of the project.
 
 In summary, adopting an Nx monorepo approach for your CCM project brings a range of benefits, including standardization, code sharing, code quality enforcement, streamlined pipelines, dependency management, build optimization, and an improved developer experience. However, it's essential to carefully plan and structure your monorepo to ensure that it remains manageable as your project grows.
+
+
+
+
+
+step 1
+npx nx@latest init --integrated
