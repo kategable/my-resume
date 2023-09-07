@@ -1,0 +1,26 @@
+.selected-contact {
+  display: inline-block;
+}
+
+#search-results {
+  background: #fff;
+  z-index: 3334;
+  max-height: 100px;
+  overflow: auto;
+  position: fixed;
+  width: 339px;
+}
+
+.contacts-container {
+  margin: -10px;
+  background-color: #fff;
+  margin-bottom: 70px;
+}
+
+.remove-icon {
+  right: 5px;
+  top: 16px;
+}
+.result-item {
+  font-size: 0.9rem;
+}

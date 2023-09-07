@@ -1,0 +1,48 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+@import 'ag-grid-community/styles/ag-grid.css';
+@import 'ag-grid-community/styles/ag-theme-alpine.css';
+
+#grid-utilities {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+
+  #filters {
+    display: flex;
+    column-gap: 30px;
+
+    .filter {
+      display: flex;
+      flex-direction: column;
+
+      input,
+      select {
+        border: 1px solid #333;
+        border-radius: 4px;
+        padding: 3px 5px;
+      }
+    }
+  }
+}
+
+.desc {
+  font-size: 13px;
+  margin-bottom: 20px;
+}
+
+finra-dropdown {
+  text-align: left;
+}
+
+.modal-actions {
+  margin-top: 30px;
+}
+
+.template-option {
+  overflow: hidden;
+  white-space: pre-wrap;
+  word-break: break-all;
+}

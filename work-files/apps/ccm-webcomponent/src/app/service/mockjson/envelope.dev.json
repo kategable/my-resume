@@ -1,0 +1,123 @@
+{
+  "NoResponse": false,
+  "accessPolicyId": "9d73fe24-de42-417e-8e6c-a05cb401fb83",
+  "clientId": "1",
+  "deliveryChannelCode": "RM",
+  "requestManagerId": "123",
+  "isPublished": false,
+  "tags": ["RM123"],
+  "draftPayload": {
+    "id": null,
+    "version": null,
+    "caseId": "20230458635",
+    "firmId": 17486,
+    "templateId": "48",
+    "emailSubjectPrepend": "FINRA Request for",
+    "emailSubjectEditable": "G. A. REPPLE & COMPANY : Options Regulations Investigation",
+    "notificationMsg": "An Options Regulations Records Request has been issued by FINRA for your Firm. Please click on the link below to view the details of the request and their respective due dates. <a href=\"https://gateway-devint.dev.finra.org/app/work-management\">Click here</a> to login to the FINRA Gateway.\n        <p>If any documents responsive to this request include BSA Confidential Information, please include the terms \"BSA Confidential Material\" in the title of the document. BSA Confidential Information includes Suspicious Activity Reports (SARs) and information revealing the existence of 1) a specific SAR or 2) a member firm's affirmative decision not to file a SAR.</p>",
+    "includeContactInfo": true,
+    "phone": "",
+    "extension": "",
+    "email": "Oleg.Panashchenko@finra.org",
+    "requestAssignees": {
+      "lstFirmData": [
+        {
+          "name": "G. A. REPPLE & COMPANY",
+          "id": 17486
+        }
+      ]
+    },
+    "lstAttachments": [],
+    "lstItemData": [
+      {
+        "itemName": "test",
+        "adhocItemCategory": "Anti-Money Laundering",
+        "itemType": "DATE_RANGE",
+        "itemGroup": "DOCUMENT",
+        "attachments": [],
+        "adhocItem": true,
+        "clientId": "0-1667873436111",
+        "version": null,
+        "notes": "",
+        "startDate": "20221220",
+        "endDate": "20231130",
+        "dueDate": "20231130",
+        "user": {
+          "id": "tst_rcm_g1_usr",
+          "name": "RCM G1 USR",
+          "group": "",
+          "email": "test@finra.org",
+          "identityProvider": "isso",
+          "firmId": "1",
+          "required": false
+        }
+      }
+    ],
+    "dataRequestContacts": {
+      "requestId": null,
+      "firmIdExternalSelected": 17486,
+      "lstFirmDataExternal": [
+        {
+          "firmId": 17486,
+          "firmName": "G. A. REPPLE & COMPANY",
+          "firmNameForUI": "G. A. REPPLE & COMPANY(17486)",
+          "lstUserDataAll": [],
+          "lstUserGroupDataSelected": [
+            {
+              "lstUserData": [
+                {
+                  "name": "SANDRA ALBANO",
+                  "group": "Regulatory Inquiries",
+                  "email": "SANDY.ALBANO@GAREPPLE.COM",
+                  "required": true
+                }
+              ],
+              "name": "Regulatory Inquiries"
+            }
+          ]
+        }
+      ],
+      "firmDataInternal": {
+        "firmId": 1,
+        "firmName": "FINRA",
+        "lstUserGroupDataSelected": [
+          {
+            "name": "RCM G1 USR",
+            "lstUserData": [
+              {
+                "id": "tst_rcm_g1_usr",
+                "name": "test@finra.org",
+                "group": "RCM G1 USR",
+                "email": "test@finra.org",
+                "identityProvider": "isso",
+                "firmId": "1",
+                "required": false
+              }
+            ]
+          }
+        ],
+        "lstUserDataAll": [
+          {
+            "id": "tst_rcm_g1_usr",
+            "name": "",
+            "group": "RCM G1 USR",
+            "email": "test@finra.org",
+            "identityProvider": "isso",
+            "firmId": "1",
+            "required": false
+          }
+        ],
+        "firmNameForUI": "FINRA (1)"
+      },
+      "caseTypeCd": "27",
+      "caseCategoryName": "CAUSE",
+      "requiredRoles": [
+        {
+          "id": 27,
+          "name": "Regulatory Inquiries"
+        }
+      ],
+      "externalSelectedFirmData": null
+    }
+  }
+}

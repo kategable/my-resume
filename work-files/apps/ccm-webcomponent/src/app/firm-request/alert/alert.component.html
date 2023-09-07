@@ -1,0 +1,47 @@
+<ng-container *ngIf="alert$ | async as alert">
+  <div *ngIf="alert.show" class="fixed toast-notification" data-test="ccm-alert">
+    <ng-container *ngIf="alert.withClose">
+      <finra-alert
+        data-test="ccm-finra-alert"
+        [theme]="alert.type"
+        type="bold"
+        show-close-icon="true"
+        (close)="onCloseToast(alert.onCloseThis, alert.onClose)"
+      >
+        <ng-template *ngTemplateOutlet="contentTemplate; context: { $implicit: alert }"></ng-template>
+      </finra-alert>
+    </ng-container>
+    <ng-container *ngIf="!alert.withClose">
+      <finra-alert
+        data-test="ccm-finra-alert"
+        [theme]="alert.type"
+        type="bold"
+        show-close-icon="false"
+        (close)="onCloseToast(alert.onCloseThis, alert.onClose)"
+      >
+        <ng-template *ngTemplateOutlet="contentTemplate; context: { $implicit: alert }"></ng-template>
+      </finra-alert>
+    </ng-container>
+  </div>
+</ng-container>
+
+<ng-template #contentTemplate let-alert>
+  <finra-icon *ngIf="alert.type === 'success'" slot="icon" icon="CheckCircle" data-test="ccm-icon-success"></finra-icon>
+  <finra-icon
+    *ngIf="alert.type === 'warning'"
+    slot="icon"
+    icon="ExclamationCircle"
+    data-test="ccm-icon-warning"
+  ></finra-icon>
+  <finra-icon *ngIf="alert.type === 'info'" slot="icon" icon="InfoCircle" data-test="ccm-icon-info"></finra-icon>
+  <finra-icon
+    *ngIf="alert.type === 'error'"
+    slot="icon"
+    icon="ExclamationTriangle"
+    data-test="ccm-icon-error"
+  ></finra-icon>
+  <div [innerHTML]="alert.message"></div>
+  <finra-button *ngIf="alert.withAction" slot="commands" theme="alert-success" onclick="onAction()">{{
+    alert.action
+  }}</finra-button>
+</ng-template>

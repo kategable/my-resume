@@ -1,0 +1,107 @@
+{
+  "list": [
+    {
+      "firstName": "Carly",
+      "lastName": "Kostakos",
+      "fullName": "Carly Kostakos",
+      "email": "t@finra.org",
+      "userId": "kostakoc",
+      "orgClass": "FINRA",
+      "firmId": 1,
+      "identityProvider": "ISSO",
+      "roles": []
+    },
+    {
+      "firstName": "Christel",
+      "lastName": "Brown",
+      "fullName": "Christel Brown",
+      "email": "t@finra.org",
+      "userId": "brownc",
+      "orgClass": "FINRA",
+      "firmId": 1,
+      "identityProvider": "ISSO",
+      "roles": []
+    },
+    {
+      "firstName": "David",
+      "lastName": "Rosenstein",
+      "fullName": "David Rosenstein",
+      "email": "t@finra.org",
+      "userId": "rosenstd",
+      "orgClass": "FINRA",
+      "firmId": 1,
+      "identityProvider": "ISSO",
+      "roles": []
+    },
+    {
+      "firstName": "Gerard",
+      "lastName": "Finn",
+      "fullName": "Gerard Finn",
+      "email": "t@finra.org",
+      "userId": "finng",
+      "orgClass": "FINRA",
+      "firmId": 1,
+      "identityProvider": "ISSO",
+      "roles": []
+    },
+    {
+      "firstName": "Jessica",
+      "lastName": "Bailey",
+      "fullName": "Jessica Bailey",
+      "email": "t@finra.org",
+      "userId": "baileyj",
+      "orgClass": "FINRA",
+      "firmId": 1,
+      "identityProvider": "ISSO",
+      "roles": []
+    },
+    {
+      "firstName": "Joseph",
+      "lastName": "Schwetz",
+      "fullName": "Joseph Schwetz",
+      "email": "t@finra.org",
+      "userId": "schwetzj",
+      "orgClass": "FINRA",
+      "firmId": 1,
+      "identityProvider": "ISSO",
+      "roles": []
+    },
+    {
+      "firstName": "Patrick",
+      "lastName": "Geraghty",
+      "fullName": "Patrick Geraghty",
+      "email": "t@finra.org",
+      "userId": "geraghtp",
+      "orgClass": "FINRA",
+      "firmId": 1,
+      "identityProvider": "ISSO",
+      "roles": []
+    },
+    {
+      "firstName": "Razina",
+      "lastName": "Dixon",
+      "fullName": "Razina Dixon",
+      "email": "t@finra.org",
+      "userId": "dixonra",
+      "orgClass": "FINRA",
+      "firmId": 1,
+      "identityProvider": "ISSO",
+      "roles": []
+    },
+    {
+      "firstName": "Robert",
+      "lastName": "Marchman",
+      "fullName": "Robert Marchman",
+      "email": "t@finra.org",
+      "userId": "marchmar",
+      "orgClass": "FINRA",
+      "firmId": 1,
+      "identityProvider": "ISSO",
+      "roles": []
+    }
+  ],
+  "totalCount": 9,
+  "offset": 0,
+  "size": 10000,
+  "totalRecordsOnPage": 9
+}

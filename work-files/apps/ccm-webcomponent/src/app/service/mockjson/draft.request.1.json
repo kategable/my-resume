@@ -1,0 +1,119 @@
+{
+  "id": null,
+  "version": null,
+  "caseId": "20150467828",
+  "firmId": 5393,
+  "templateId": "9",
+  "emailSubjectPrepend": "FINRA Request for",
+  "emailSubjectEditable": "CHARLES SCHWAB & CO., INC. : Alternate Net Capital Cycle Exam Request",
+  "notificationMsg": "<p>An Alternate Net Capital Cycle Exam Request has been issued by FINRA for your firm. Please click on the link below to view the details of the request and their respective due dates. <a href=\"https://firms1.qa.finra.org/recordrequests\">Click here</a> to login to the Firm Gateway.</p>\n\n<p>For additional help please refer to our <a href=\"http://www.finra.org/Industry/Compliance/FirmGateway/P450554\">FAQ page</a>.</p>\n\n<p>&nbsp;</p>\n",
+  "includeContactInfo": true,
+  "phone": "2403864773",
+  "extension": "",
+  "email": "James.Zhou@finra.org",
+  "lstAttachments": [
+    {
+      "attachmentId": 2000,
+      "externalAttachmentUrl": "",
+      "filename": "",
+      "contentType": "",
+      "fileSize": null,
+      "tags": {
+        "finra8210": true,
+        "client8210": true
+      }
+    },
+    {
+      "attachmentId": null,
+      "externalAttachmentUrl": "http://finra.org/some_correspondence_file.html",
+      "filename": "some_corr_file.html",
+      "contentType": "text/html",
+      "fileSize": 300
+    }
+  ],
+  "lstItemData": [
+    {
+      "attachments": [
+        {
+          "attachmentId": 1000,
+          "externalAttachmentUrl": "",
+          "filename": "",
+          "contentType": "",
+          "fileSize": null
+        },
+        {
+          "attachmentId": null,
+          "externalAttachmentUrl": "http://finra.org/some_guidance_file.html",
+          "filename": "some_guidance_file.html",
+          "contentType": "text/html",
+          "fileSize": 200
+        }
+      ],
+      "templateData": {
+        "id": "11",
+        "category": "Credit Risk",
+        "noResponseAvailable": false
+      },
+      "user": {
+        "id": "k25513",
+        "identityProvider": "isso"
+      },
+      "itemType": "DATE_RANGE",
+      "itemGroup": "DOCUMENT",
+      "itemName": "Credit Risk Exposure Reports",
+      "isConfidential": false,
+      "tags": [
+        {
+          "key": "CAT",
+          "value": ""
+        }
+      ],
+      "noResponse": false,
+      "notes": "add an item note.",
+      "startDate": "20160703",
+      "endDate": "20160706",
+      "dueDate": "20160712",
+      "formData": "{\"clearingFirm\":{\"id\":611,\"name\":\"MUTUAL OF OMAHA INVESTOR SERVICES, INC.\"}}"
+    }
+  ],
+  "requestAssignees": {
+    "lstFirmData": [
+      {
+        "id": 5393,
+        "name": "CHARLES SCHWAB & CO., INC."
+      }
+    ]
+  },
+  "dataRequestContacts": {
+    "lstFirmDataExternal": [
+      {
+        "firmId": 5393,
+        "lstUserGroupDataSelected": [
+          {
+            "lstUserData": [
+              {
+                "name": "WALTER BETTINGER",
+                "group": "Chief Compliance Officer",
+                "email": "john.doe@abc.com"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "firmDataInternal": {
+      "firmId": 1,
+      "lstUserGroupDataSelected": [
+        {
+          "lstUserData": [
+            {
+              "name": "Jane Doe",
+              "group": "Data Intake",
+              "email": "Jane.Doe@finra.org"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

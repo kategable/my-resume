@@ -1,0 +1,443 @@
+<div data-test="ccm-items" class="flex flex-row items-container relative" *ngIf="viewModel$ | async as data">
+  <div class="card-bg h-screen overflow-auto" [ngClass]="{ 'basis-3/4': showSidePanel, 'full-width': !showSidePanel }">
+    <div id="content" *ngIf="!data.itemsViewModel.items?.length" class="p-8 items-container">
+      <div class="grid gap-4 place-content-center h-48">
+        <div class="no-items-info-icon">
+          <finra-icon family="light" icon="InfoCircle" size="sm"></finra-icon>
+        </div>
+        <div>There are no items in the request at the moment.</div>
+      </div>
+    </div>
+    <ng-container *ngIf="data.itemsViewModel.items.length > 0">
+      <finra-alert class="selected-items" theme="info" type="toast" *ngIf="!data.isPublished && seletedItemsCount > 1">
+        <finra-icon slot="icon" icon="BoxCheck"></finra-icon>
+        <div>
+          <span class="font-bold">{{ seletedItemsCount }} items selected</span> on this page
+        </div>
+      </finra-alert>
+      <ng-container *ngFor="let model of data.itemsViewModel.items; let index = index">
+        <div *ngIf="!model.open">
+          <app-view-item
+            [icon]="model.icon"
+            [model]="model"
+            [isSelected]="model === (selectedItem$ | async)"
+            [showSelect]="data.status === DRAFT"
+            (onItemChecked)="onItemChecked(model, data.itemsViewModel)"
+            (onItemSelect)="selectItem(index, data.itemsViewModel)"
+            (onToggleOpen)="toggleOpen(index, data.itemsViewModel)"
+          ></app-view-item>
+        </div>
+        <!-- Open item-->
+        <div *ngIf="model.open">
+          <div class="pt-4 pb-4 pl-8 pr-8 drop-shadow-md items-list-container">
+            <div class="toggle-header hover:cursor-pointer" (click)="toggleOpen(index, data.itemsViewModel)"></div>
+            <div class="pr-4 flex float-right">
+              <finra-button theme="tertiary" [title]="model.item.status">
+                <finra-icon
+                  *ngIf="model.icon"
+                  [icon]="model.icon"
+                  class="float-right inline pr-2"
+                  family="light"
+                  size="sm"
+                ></finra-icon>
+                <span class="pr-2">{{ model.item.status }}</span>
+              </finra-button>
+              <finra-checkbox
+                *ngIf="data.status === DRAFT"
+                (change)="onItemChecked(model, data.itemsViewModel)"
+                class="float-right inline pr-2 pt-[10px]"
+                [value]="model.selected"
+              ></finra-checkbox>
+              <finra-button theme="tertiary" (click)="toggleOpen(index, data.itemsViewModel); $event.stopPropagation()">
+                <finra-icon icon="ChevronDown" family="light" size="sm" slot="icon"></finra-icon>
+              </finra-button>
+            </div>
+            <div class="item-content-container">
+              <form>
+                <div class="flex flex-row mb-5">
+                  <div class="basis-2/4 pr-2">
+                    <div
+                      data-test="ccm-tags"
+                      class="ccm-tags"
+                      *ngIf="
+                        model.d2iFlag ||
+                        model.catFlag ||
+                        model.rciFlag ||
+                        model.partiallySubmitted ||
+                        (model.item.ewsCommentCount && model.item.ewsCommentCount > 0)
+                      "
+                    >
+                      <div data-test="ccm-d2flag" class="d2i-span-position" *ngIf="model.d2iFlag">
+                        <span data-test="ccm-item-d2iFlag-span" class="d2i-span ml-1 mr-1">D2i</span>
+                      </div>
+                      <div data-test="ccm-catFlag" *ngIf="model.catFlag">
+                        <span data-test="ccm-item-catFlag" class="gray-span ml-1 mr-1">CAT</span>
+                      </div>
+                      <div data-test="ccm-catFlag" *ngIf="model.rciFlag">
+                        <span data-test="ccm-item-rciFlag" class="blue-span ml-1 mr-1">RCI</span>
+                      </div>
+                      <div data-test="ccm-partial" *ngIf="model.partiallySubmitted">
+                        <span data-test="ccm-item-partiallySubmitted" class="partial-span ml-1 mr-1"
+                          >Partial Submission</span
+                        >
+                      </div>
+                      <div
+                        data-test="ccm-firm-comments"
+                        *ngIf="model.item.ewsCommentCount && model.item.ewsCommentCount > 0"
+                      >
+                        <span data-test="ccm-firm-comments-count" class="partial-span ml-1 mr-1"
+                          >Firm Comments: {{ model.item.ewsCommentCount }}</span
+                        >
+                      </div>
+                    </div>
+                    <finra-input-text
+                      label="Item Name"
+                      [value]="model.item.itemName"
+                      required="true"
+                      (blur)="onBlur($event, 'itemName', index)"
+                      (change)="onChange($event, 'itemName', model.item, data.itemsViewModel)"
+                      [disabled]="data.isPublished || !model.item.adhocItem"
+                      [error]="visited[index]?.itemName && !model.item.itemName && 'Required'"
+                    ></finra-input-text>
+                  </div>
+                  <div class="basis-2/4 pr-2">
+                    <ng-container *ngIf="data.isPublished">
+                      <finra-dropdown
+                        label="Category"
+                        ngDefaultControl
+                        required="true"
+                        [disabled]="true"
+                        [selectedValue]="model.item.category"
+                        [selectedText]="model.item.category"
+                      >
+                        <finra-dropdown-option [value]="model.item.category" slot="option">
+                          {{ model.item.category }}
+                        </finra-dropdown-option>
+                      </finra-dropdown>
+                    </ng-container>
+                    <ng-container *ngIf="!data.isPublished">
+                      <ng-container *ngIf="model.item.adhocItem">
+                        <finra-dropdown
+                          label="Category"
+                          ngDefaultControl
+                          required="true"
+                          [selectedValue]="model.item.adhocItemCategory"
+                          [selectedText]="model.item.adhocItemCategory"
+                          (blur)="onBlur($event, 'adhocItemCategory', index)"
+                          (change)="onItemCategoryChange($event, model.item, data.itemsViewModel)"
+                          [error]="visited[index]?.adhocItemCategory && !model.item.adhocItemCategory && 'Required'"
+                        >
+                          <finra-dropdown-option
+                            *ngFor="let category of itemTemplateCategories$ | async"
+                            [value]="category"
+                            slot="option"
+                          >
+                            {{ category }}
+                          </finra-dropdown-option>
+                        </finra-dropdown>
+                      </ng-container>
+                      <ng-container *ngIf="!model.item.adhocItem">
+                        <finra-dropdown
+                          label="Category"
+                          ngDefaultControl
+                          required="true"
+                          [disabled]="true"
+                          [selectedValue]="model.item.templateData?.category"
+                          [selectedText]="model.item.templateData?.category"
+                        >
+                          <finra-dropdown-option [value]="model.item.templateData?.category" slot="option">
+                            {{ model.item.templateData?.category }}
+                          </finra-dropdown-option>
+                        </finra-dropdown>
+                      </ng-container>
+                    </ng-container>
+                  </div>
+                </div>
+                <div
+                  class="flex flex-row mb-5"
+                  *ngIf="model.item.adhocItem || model.item.templateData?.noResponseAvailable"
+                >
+                  <div class="basis-4/4">
+                    <finra-checkbox
+                      name="selectItem"
+                      [value]="model.item.noResponse"
+                      (change)="onNoResponseChange(model.item, data.itemsViewModel)"
+                      label="No Response"
+                      [disabled]="data.isPublished"
+                    >
+                    </finra-checkbox>
+                  </div>
+                </div>
+                <ng-container *ngIf="!model.item.noResponse">
+                  <label class="date-type-label">Date Type *</label>
+                  <div class="flex flex-row mb-5">
+                    <finra-radio-group
+                      id="dateType_{{ index }}"
+                      label="Date Type"
+                      direction="horizontal"
+                      [required]="!model.item.noResponse"
+                      [value]="model.item.itemType"
+                      (change)="onChange($event, 'itemType', model.item, data.itemsViewModel)"
+                      class="pt-7"
+                    >
+                      <finra-radio
+                        name="dateType_{{ index }}"
+                        value="AS_OF_DATE"
+                        slot="item"
+                        [disabled]="data.isPublished"
+                        >As Of Date</finra-radio
+                      >
+                      <finra-radio
+                        name="dateType_{{ index }}"
+                        value="DATE_RANGE"
+                        slot="item"
+                        [disabled]="data.isPublished"
+                        >Date Range</finra-radio
+                      >
+                    </finra-radio-group>
+
+                    <finra-datepicker
+                      #asOfDate
+                      datechange="dateChange($event)"
+                      width="200px"
+                      label="As of date"
+                      class="pr-5"
+                      placeholder="MM/DD/YYYY"
+                      (change)="onDateChange($event, 'asOfDate', model.item, data.itemsViewModel)"
+                      [required]="!model.item.noResponse"
+                      [value]="model.item.asOfDate"
+                      [disabled]="data.isPublished"
+                      (blur)="onBlur($event, 'asOfDate', index)"
+                      [error]="
+                        (visited[index]?.asOfDate && !model.item.asOfDate && 'Required') ||
+                        (visited[index]?.asOfDate && !validateDate(model.item.asOfDate) && 'Provide valid date')
+                      "
+                      *ngIf="model.item.itemType === ItemType.AS_OF_DATE"
+                    >
+                    </finra-datepicker>
+                    <finra-datepicker
+                      #startDate
+                      datechange="dateChange($event)"
+                      width="200px"
+                      label="Start Date"
+                      class="pr-5"
+                      placeholder="MM/DD/YYYY"
+                      [required]="!model.item.noResponse"
+                      [value]="model.item.startDate"
+                      (blur)="onBlur($event, 'startDate', index)"
+                      (change)="onDateChange($event, 'startDate', model.item, data.itemsViewModel)"
+                      [disabled]="data.isPublished"
+                      [error]="validateStartDate(index, model.item)"
+                      *ngIf="model.item.itemType === ItemType.DATE_RANGE"
+                    >
+                    </finra-datepicker>
+                    <finra-datepicker
+                      datechange="dateChange($event)"
+                      width="200px"
+                      label="End Date"
+                      placeholder="MM/DD/YYYY"
+                      [required]="!model.item.noResponse"
+                      [value]="model.item.endDate"
+                      (change)="onDateChange($event, 'endDate', model.item, data.itemsViewModel)"
+                      (blur)="onBlur($event, 'endDate', index)"
+                      class="pr-5"
+                      [error]="
+                        (visited[index]?.endDate && !model.item.endDate && 'Required') ||
+                        (visited[index]?.endDate && !validateDate(model.item.endDate) && 'Provide valid date')
+                      "
+                      [disabled]="data.isPublished"
+                      [ngClass]="{ invisible: model.item.itemType === ItemType.AS_OF_DATE }"
+                    >
+                    </finra-datepicker>
+                    <finra-datepicker
+                      datechange="dateChange($event)"
+                      width="200px"
+                      placeholder="MM/DD/YYYY"
+                      label="Due Date"
+                      class="pr-5"
+                      (change)="onDateChange($event, 'dueDate', model.item, data.itemsViewModel)"
+                      [required]="!model.item.noResponse"
+                      [value]="model.item.dueDate"
+                      (blur)="onBlur($event, 'dueDate', index)"
+                      [disabled]="data.isPublished"
+                      [error]="
+                        (visited[index]?.dueDate && !model.item.dueDate && 'Required') ||
+                        (visited[index]?.dueDate && !validateDate(model.item.dueDate) && 'Provide valid date') ||
+                        (visited[index]?.dueDate && lessThanToday(model.item.dueDate) && 'Only after today')
+                      "
+                    >
+                    </finra-datepicker>
+                  </div>
+                </ng-container>
+                <div class="flex flex-row mb-5">
+                  <div class="basis-2/4">
+                    <finra-dropdown
+                      label="Assign To"
+                      [required]="!model.item.noResponse"
+                      placeholder="Select Assign To"
+                      ngDefaultControl
+                      [selectedText]="model.selectedAssignTo | staffformat"
+                      [selectedValue]="model.selectedAssignTo"
+                      (change)="onAssignedToChange($event, model, data)"
+                      [disabled]="data.isPublished"
+                      (blur)="onBlur($event, 'user', index)"
+                      [value]="model.selectedAssignTo"
+                      [error]="!model.item.noResponse && visited[index]?.user && !model.selectedAssignTo && 'Required'"
+                    >
+                      <finra-dropdown-option *ngFor="let intContact of data.staff" [value]="intContact" slot="option">
+                        {{ intContact | staffformat }}
+                      </finra-dropdown-option>
+                    </finra-dropdown>
+                  </div>
+
+                  <div class="basis-2/4 pl-2" *ngIf="model.hasClearingFirm">
+                    <finra-dropdown
+                      label="Clearing Firm"
+                      placeholder="Select Clearing Firm"
+                      ngDefaultControl
+                      [selectedText]="model.selectedClearingFirm?.name"
+                      [selectedValue]="model.selectedClearingFirm"
+                      [disabled]="data.isPublished"
+                      (change)="onClearningFirmChange($event, model, data.itemsViewModel)"
+                      (blur)="onBlur($event, 'formData', index)"
+                      [value]="model.selectedClearingFirm"
+                      required="true"
+                    >
+                      <finra-dropdown-option *ngFor="let firm of clearingFirms$ | async" [value]="firm" slot="option">
+                        {{ firm.name }}
+                      </finra-dropdown-option>
+                    </finra-dropdown>
+                  </div>
+                </div>
+                <div class="flex flex-row" *ngIf="model.hasClearingFirm">
+                  <finra-alert theme="info" type="toast">
+                    <finra-icon slot="icon" icon="InfoCircle"></finra-icon>
+                    <div>
+                      You will need to choose a <b>Clearing Firm</b> from the drop-down menu. A separate request must be
+                      made for each clearing firm that the firm clears through, including self-clearing arrangements. If
+                      you don't see the clearing firm, the firm must update its firm clearing arrangements via firm
+                      gateway. The change in clearing firm information will become available to you one business day
+                      after the firm submits required information to FINRA.<br />
+                      Note: For individual requests, the Associated Firm on the Information and Contacts tab will need
+                      to be populated in order to select a clearing firm.
+                    </div>
+                  </finra-alert>
+                </div>
+
+                <div class="flex flex-row">
+                  <div class="">
+                    <finra-alert theme="info" type="toast">
+                      <finra-icon slot="icon" icon="InfoCircle"></finra-icon>
+                      <div>
+                        The notes box below is included in the unencrypted email being sent to external recipients. Do
+                        not include any PCI Or RCI information in this text box. Use the guidance file upload feature to
+                        send any requested information.
+                      </div>
+                    </finra-alert>
+                    <div class="inline flex justify-end" *ngIf="!data.isPublished">
+                      <label
+                        *ngIf="externalAttachment.show"
+                        class="text capitalize font-sans h-8 leading-5 text-base text-blue-70 hover:text-slate-70 attachment-link ml-5"
+                      >
+                        <finra-icon icon="Paperclip" family="light" size="xs" class="attachment-icon"></finra-icon>
+                        <span (click)="openFileSelection(model, data)">{{ externalAttachment.text }} Attachment</span>
+                      </label>
+                      <label
+                        class="text capitalize font-sans h-8 leading-5 text-base text-blue-70 hover:text-slate-70 attachment-link ml-5"
+                      >
+                        <finra-icon icon="Paperclip" family="light" size="xs" class="attachment-icon"></finra-icon>
+                        <input
+                          type="file"
+                          class="file-input"
+                          (change)="onAttachLocalFiles($event, model, data)"
+                          multiple
+                        />
+                        Local Attachment
+                      </label>
+                    </div>
+                    <finra-text-area
+                      placeholder="Add a note..."
+                      label="Description for request"
+                      [required]="false"
+                      [disabled]="data.isPublished"
+                      aria-placeholder="Please provide account statements for the requested time period"
+                      [value]="model.item.notes"
+                      (blur)="onBlur($event, 'notes', index)"
+                      (change)="onChange($event, 'notes', model.item, data.itemsViewModel)"
+                    ></finra-text-area>
+                  </div>
+                </div>
+                <div>
+                  <app-uploaded-attachments
+                    (onRemoveFile)="onRemoveFile($event, index, data)"
+                    [defaultTab]="data.isPublished ? 'received' : 'sent'"
+                    [readOnly]="data.isPublished"
+                    [canDownloadAll]="data.isPublished"
+                    [item]="model"
+                    [documents]="model.item.attachments"
+                    [sentDocuments]="model | sentAttachment : data"
+                    [receivedDocuments]="model | receivedDocuments"
+                  ></app-uploaded-attachments>
+                </div>
+              </form>
+              <finra-button
+                data-test="ccm-delete-item"
+                theme="tertiary"
+                *ngIf="!data.isPublished"
+                class="float-right item-clickable"
+                (click)="onRemoveSelectedItem(index)"
+              >
+                <finra-icon icon="Trash" family="light" size="xs" slot="icon"></finra-icon> Delete Item
+              </finra-button>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <!-- Confirmation dialog -->
+      <finra-modal
+        data-test="ccm-delete-modal"
+        *ngIf="showDeleteConfirmation"
+        [flexModal]="true"
+        [backDrop]="true"
+        size="md"
+        theme="info"
+        show-close-icon="true"
+        (close)="onCancelDelete()"
+      >
+        <div slot="title">Confirm Delete Items</div>
+        <p>Are you sure, you want to delete selected item?</p>
+
+        <finra-button slot="commands" theme="secondary" (onclick)="onCancelDelete()">Cancel</finra-button>
+        <finra-button slot="commands" theme="primary" (onclick)="onDelete(data.itemsViewModel)">Continue</finra-button>
+      </finra-modal>
+    </ng-container>
+  </div>
+  <div
+    class="m-2 p-5 card-bg h-screen request-type relative"
+    [ngClass]="{ 'basis-1/4': showSidePanel, 'side-bar': !showSidePanel }"
+  >
+    <div
+      [ngClass]="{ inline: showSidePanel && data.status === DRAFT && !showBulkUpdatePanel }"
+      [hidden]="showBulkUpdatePanel || !showSidePanel || data.status !== DRAFT"
+    >
+      <app-request-type (onSelect)="onItemTypeSelect($event, data.itemsViewModel)"></app-request-type>
+    </div>
+    <div
+      [ngClass]="{ inline: showSidePanel && data.isPublished }"
+      [hidden]="!data.isPublished || !showSidePanel || !(selectedItem$ | async)"
+    >
+      <app-item-actions-update [viewModel]="data"></app-item-actions-update>
+    </div>
+    <div
+      [ngClass]="{ inline: showSidePanel && showBulkUpdatePanel }"
+      [hidden]="data.isPublished || !showSidePanel || !showBulkUpdatePanel"
+    >
+      <app-items-bulk-update
+        [staff]="data.staff"
+        [viewModel]="data.itemsViewModel"
+        (onUpdate)="bulkUpdate($event, data)"
+      ></app-items-bulk-update>
+    </div>
+    <app-toggle-panel [showSidePanel]="showSidePanel" (onShowPanelChange)="toggleItemTypeSelect()"></app-toggle-panel>
+  </div>
+</div>

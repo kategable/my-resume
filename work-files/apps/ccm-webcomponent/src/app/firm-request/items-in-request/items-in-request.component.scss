@@ -1,0 +1,184 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+@import '../../../styles.scss';
+.items-container {
+  margin: -10px;
+
+  .action-section {
+    background-color: #fff;
+    left: 0px;
+  }
+
+  .ccm-tags {
+    margin-left: 97px;
+    margin-bottom: -22px;
+    display: flex;
+  }
+
+  .item-status {
+    font-size: 1.5rem;
+    color: #1c355a;
+  }
+
+  .item-header-container {
+    display: flex;
+    justify-content: right;
+  }
+
+  .alert {
+    height: 50px;
+  }
+
+  .selection-text {
+    padding-left: 20px;
+    top: 8px;
+  }
+
+  .icon-selection-check {
+    left: -11px;
+    top: -4px;
+  }
+
+  .icon-remove-selected {
+    left: -31px;
+    top: -6px;
+  }
+
+  .menu-delete-icon {
+    position: absolute;
+  }
+
+  .menu-edit-icon {
+    position: absolute;
+  }
+
+  .attachment-icon {
+    display: inline;
+  }
+
+  .attachment-link {
+    display: inline;
+    font-size: 14px;
+    color: #0070b7;
+    text-transform: capitalize;
+    cursor: pointer;
+  }
+
+  .items-list-container {
+    position: relative;
+    background-color: #fff;
+
+    &:last-child {
+      margin-bottom: 4.5rem;
+    }
+  }
+
+  .items-list-container.notOpen {
+    &:hover {
+      background-color: #cce6f6;
+    }
+  }
+
+  .actions {
+    flex: 1;
+    text-align: right;
+    height: 25px;
+  }
+
+  .icon-select-item {
+    display: inline-block;
+  }
+
+  .item-clickable {
+    display: inline-block;
+    cursor: pointer;
+  }
+
+  .item-action-menu {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+  }
+
+  .item-content-container {
+    width: 100%;
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  .date-type-label {
+    height: 18px;
+    margin-bottom: 7.5px;
+    --tw-text-opacity: 1;
+    color: rgba(79, 101, 133, var(--tw-text-opacity));
+    line-height: 1rem;
+    font-size: 14px;
+  }
+
+  .no-items-info-icon {
+    text-align: center;
+  }
+
+  .file-input {
+    display: none;
+  }
+
+  .request-type {
+    border-left: 5px solid #e4e7ec;
+    margin-top: 0px;
+  }
+
+  .full-width {
+    flex-basis: 100%;
+    margin-right: 60px;
+  }
+
+  .card-bg {
+    margin-right: -8px;
+  }
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th {
+  background-color: #dddddd;
+}
+
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+.status-icon {
+  padding-top: 13px;
+  padding-left: 10px;
+}
+
+.toggle-header {
+  width: 100%;
+  height: 55px;
+  position: absolute;
+  margin-left: -32px;
+  margin-top: -17px;
+}
+
+.status-position {
+  top: -35px;
+}
+
+.button-icon {
+  left: -31px;
+  top: 8px;
+}
+
+.selected-items {
+  height: 50px;
+  margin: 20px;
+}

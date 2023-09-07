@@ -1,0 +1,29 @@
+<ng-container *ngIf="events$ | async as events">
+  <div class="pb-6" *ngFor="let event of events">
+    <div class="pb-2">
+      <span>
+        <span [ngClass]="event.identityProvider === 'ISSO' ? 'examiner_ico_1x' : 'firmUser_ico_1x'"> </span>
+        <span class="mt-1 pl-1">
+          <span class="actor"> {{ event.fullName }} </span>
+          <span class="targetDetails" *ngIf="event.isExternalUser">
+            of {{ event.userName }} ({{ event.targetId }})
+          </span>
+          <span class="action"> {{ event.action }} </span>
+          <span *ngIf="event.dueDate"> with due date of {{ event.dueDate | date : 'shortDate' }} </span>
+        </span>
+      </span>
+    </div>
+
+    <div [innerHTML]="event.formattedComments"></div>
+    <div *ngFor="let file of event.documents">
+      <a [href]="file.attachmentUrl" class="cursor-pointer ccm-file-name-link">{{ file.filename }}</a>
+      {{ file.fileSize | filesize }}
+    </div>
+    <div class="mt-1 text-xs">
+      <span
+        ><finra-icon class="inline clock" family="solid" icon="Clock" size="xs"></finra-icon
+        ><span class="pl-2">{{ event.createDate | date : 'medium' }}</span></span
+      >
+    </div>
+  </div>
+</ng-container>

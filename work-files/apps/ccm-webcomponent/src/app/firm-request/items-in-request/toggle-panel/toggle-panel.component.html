@@ -1,0 +1,18 @@
+<span class="item-type-expand-collapse inline-block absolute cursor-pointer">
+  <finra-icon
+    class="item-type-expand-collapse-icon"
+    icon="ChevronDoubleRight"
+    family="light"
+    size="sm"
+    *ngIf="showSidePanel"
+    (click)="toggleItemTypeSelect()"
+  ></finra-icon>
+  <finra-icon
+    class="item-type-expand-collapse-icon"
+    icon="ChevronDoubleLeft"
+    family="light"
+    size="sm"
+    *ngIf="!showSidePanel"
+    (click)="toggleItemTypeSelect()"
+  ></finra-icon>
+</span>

@@ -1,0 +1,25 @@
+{
+  "firmId": 164399,
+  "formContacts": [
+    {
+      "firstName": "John",
+      "lastName": "Doe",
+      "fullName": "John Doe",
+      "email": "john.doe@finra.org",
+      "roles": [
+        { "id": 33, "name": "Anti-Money Laundering Compliance Contact(AML)" },
+        { "id": 27, "name": "Regulatory Inquiries" }
+      ]
+    },
+    {
+      "firstName": "Jane",
+      "lastName": "Buck",
+      "fullName": "Jane Buck",
+      "email": "jane.buck@finra.org",
+      "roles": [
+        { "id": 33, "name": "Anti-Money Laundering Compliance Contact(AML)" },
+        { "id": 27, "name": "Regulatory Inquiries" }
+      ]
+    }
+  ]
+}

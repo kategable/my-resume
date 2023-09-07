@@ -1,0 +1,89 @@
+<label class="date-type-label">Date Type *</label>
+<div class="flex flex-row mb-5">
+  <finra-radio-group
+    class="cursor-pointer"
+    id="dateType"
+    label="Date Type"
+    direction="horizontal"
+    [required]="true"
+    [value]="model.item.itemType"
+    (change)="onChange($event, 'itemType')"
+  >
+    <finra-radio name="dateType" [value]="AS_OF_DATE" slot="item">As Of Date</finra-radio>
+    <finra-radio name="dateType" [value]="DATE_RANGE" slot="item">Date Range</finra-radio>
+  </finra-radio-group>
+</div>
+<div class="flex flex-row mb-5" *ngIf="model.item.itemType === AS_OF_DATE">
+  <finra-datepicker
+    #asOfDate
+    width="200px"
+    label="As of date"
+    class="pr-5"
+    placeholder="MM/DD/YYYY"
+    (change)="onDateChange($event, 'asOfDate')"
+    [value]="model.item.asOfDate"
+    (blur)="visited.asOfDate = true"
+    [error]="validateAsOfDate()"
+  >
+  </finra-datepicker>
+</div>
+<div class="flex flex-row mb-1" *ngIf="model.item.itemType === DATE_RANGE">
+  <finra-datepicker
+    #startDate
+    width="200px"
+    label="Start Date"
+    class="pr-5"
+    placeholder="MM/DD/YYYY"
+    [value]="model.item.startDate"
+    (blur)="visited.startDate = true; showError = false"
+    (change)="onDateChange($event, 'startDate')"
+    [error]="validateStartDate() || (showError && 'Provide valid date')"
+  >
+  </finra-datepicker>
+</div>
+<div class="flex flex-row mb-1" *ngIf="model.item.itemType === DATE_RANGE">
+  <finra-datepicker
+    width="200px"
+    label="End Date"
+    placeholder="MM/DD/YYYY"
+    [value]="model.item.endDate"
+    (change)="onDateChange($event, 'endDate')"
+    (blur)="visited.endDate = true; showError = false"
+    class="pr-5"
+    [error]="validateEndDate() || (showError && 'Provide valid date')"
+  >
+  </finra-datepicker>
+</div>
+<div class="flex flex-row mb-1">
+  <finra-datepicker
+    datechange="dateChange($event)"
+    width="200px"
+    placeholder="MM/DD/YYYY"
+    label="Due Date"
+    class="pr-5"
+    (change)="onDateChange($event, 'dueDate')"
+    [value]="model.item.dueDate"
+    (blur)="visited.dueDate = true"
+    [error]="validateDueDate()"
+  >
+  </finra-datepicker>
+</div>
+<div class="flex flex-row mb-5">
+  <finra-dropdown
+    label="Assign To"
+    placeholder="Select Assign To"
+    [selectedText]="model.selectedAssignTo | staffformat"
+    [selectedValue]="model.selectedAssignTo"
+    (change)="onAssignedToChange($event)"
+    (blur)="visited.user = true"
+    [value]="model.selectedAssignTo"
+  >
+    <finra-dropdown-option *ngFor="let intContact of staff" [value]="intContact" slot="option">
+      {{ intContact | staffformat }}
+    </finra-dropdown-option>
+  </finra-dropdown>
+</div>
+<div class="mt-3">
+  <finra-button theme="primary" (click)="update()" class="mr-2">Update</finra-button>
+  <finra-button theme="primary" (click)="reset()" class="mr-2">Reset</finra-button>
+</div>

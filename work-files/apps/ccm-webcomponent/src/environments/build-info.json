@@ -1,0 +1,12 @@
+{
+  "COMPONENT": "debug",
+  "BUILD_TIMESTAMP": "debug",
+  "BUILD_ID": "debug",
+  "BUILD_URL": "debug",
+  "GIT_BRANCH": "debug",
+  "GIT_COMMIT": "debug",
+  "GIT_URL": "debug",
+  "BUILD_PLATFORM": "debug",
+  "BUILD_NODE": "debug",
+  "BUILD_NPM": "debug"
+}

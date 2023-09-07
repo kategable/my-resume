@@ -1,0 +1,38 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+:host * {
+  background-color: transparent;
+}
+
+.fatal-error-screen {
+  font-family: sans-serif;
+  padding: 15px;
+  width: 80%;
+  margin: auto;
+}
+
+.header {
+  text-align: center;
+  font-size: 18px;
+  padding: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-width: thin;
+  border-color: #a59e8c;
+  background-color: #fff7ed;
+  color: #b03432;
+}
+
+.body {
+  color: black;
+  padding: 20px;
+}
+.link {
+  font-weight: 500;
+  color: #3182ce;
+  text-decoration: underline;
+  &:hover {
+    color: #2c5282;
+  }
+}

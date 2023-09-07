@@ -1,0 +1,79 @@
+<ng-container *ngIf="model">
+  <div
+    [ngClass]="{ 'selected-border': isSelected }"
+    (click)="onItemSelect.emit()"
+    data-test="ccm-view-item"
+    class="hover:cursor-auto flex notOpen mb-2 mt-2 pt-4 pb-4 pl-8 pr-8 drop-shadow-md items-list-container"
+  >
+    <span>
+      <div data-test="ccm-item-name">
+        {{ model.item.itemName
+        }}<span data-test="ccm-item-d2iFlag" class="d2i-span mr-1" *ngIf="model.d2iFlag">D2i</span>
+        <span data-test="ccm-item-catFlag" class="gray-span ml-1 mr-1" *ngIf="model.catFlag">CAT</span>
+        <span data-test="ccm-item-rciFlag" class="blue-span ml-1 mr-1" *ngIf="model.rciFlag">RCI</span>
+        <span data-test="ccm-item-partiallySubmitted" class="partial-span ml-1 mr-1" *ngIf="model.partiallySubmitted"
+          >Partial Submission</span
+        >
+        <span
+          *ngIf="model.item.ewsCommentCount && model.item.ewsCommentCount > 0"
+          data-test="ccm-item-comments"
+          class="partial-span ml-1 mr-1"
+          >Firm Comments: {{ model.item.ewsCommentCount }}</span
+        >
+      </div>
+      <div class="min-height">
+        <ng-container *ngIf="model.selectedAssignTo">
+          <span
+            data-test="ccm-item-user-name"
+            [ngClass]="{ 'border-r-2 border-black': model.item.dueDate }"
+            class="pr-2"
+            >Assign To: {{ model.selectedAssignTo.fullName }}</span
+          >
+        </ng-container>
+        <ng-container *ngIf="model.item.dueDate">
+          <span data-test="ccm-item-dueDate" [ngClass]="{ 'pl-2': model.item.user }" *ngIf="model.item.dueDate"
+            >Due Date: {{ model.item.dueDate }}</span
+          >
+        </ng-container>
+      </div>
+    </span>
+    <span class="actions">
+      <span class="inline-block">
+        <div class="pr-4 flex">
+          <ng-container>
+            <finra-button
+              theme="tertiary"
+              class="hover:cursor-auto"
+              (click)="onItemChecked.emit(); $event.stopPropagation()"
+            >
+              <finra-icon
+                *ngIf="model.icon"
+                data-test="ccm-item-status-icon"
+                class="float-right inline pr-2"
+                [icon]="model.icon"
+                family="light"
+                size="sm"
+              ></finra-icon>
+              <span data-test="ccm-item-status" class="pr-2">{{ model.item.status }}</span>
+            </finra-button>
+          </ng-container>
+          <finra-button
+            *ngIf="showSelect"
+            theme="tertiary"
+            class="hover:cursor-auto"
+            (click)="onItemChecked.emit(); $event.stopPropagation()"
+          >
+            <finra-checkbox
+              family="light"
+              class="float-right inline pr-2 pt-[10px]"
+              [value]="model.selected"
+            ></finra-checkbox>
+          </finra-button>
+          <finra-button theme="tertiary" class="hover:cursor-pointer">
+            <finra-icon icon="ChevronUp" family="light" size="sm" slot="icon"></finra-icon>
+          </finra-button>
+        </div>
+      </span>
+    </span>
+  </div>
+</ng-container>

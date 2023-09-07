@@ -1,0 +1,9 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+@import '../../../styles.scss';
+
+.remove-file-icon {
+  top: -3px;
+  left: -30px;
+}

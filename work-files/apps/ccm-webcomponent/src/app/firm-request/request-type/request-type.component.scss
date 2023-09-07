@@ -1,0 +1,50 @@
+:host {
+  --results-height: 150px;
+
+  #search-input {
+    margin-bottom: 20px;
+  }
+
+  #search-results {
+    height: var(--results-height);
+    border: 1px solid #d3d8e0;
+    background-color: #fff;
+    position: relative;
+    overflow-y: scroll;
+    margin-top: -20px;
+  }
+
+  .container {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+  }
+
+  #preview-button-container {
+    margin-top: 50px;
+  }
+
+  .result-item {
+    padding: 10px 20px;
+    line-height: 19px;
+    cursor: pointer;
+    position: relative;
+    text-align: left;
+    font-size: 14px;
+  }
+
+  .result-item:hover {
+    cursor: pointer;
+    background-color: #0082d1;
+    color: #fff;
+  }
+
+  .result-item:first-child {
+    padding-top: 20px;
+  }
+
+  .result-item:last-child {
+    padding-bottom: 20px;
+  }
+}

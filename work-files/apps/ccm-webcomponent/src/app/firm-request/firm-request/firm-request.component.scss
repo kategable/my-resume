@@ -1,0 +1,24 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+.firm-request-container {
+  background-color: #e4e7ec;
+  padding-bottom: 3.5rem;
+  display: table;
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+  .back-button {
+    color: #2f6db9;
+    display: inline-block;
+    cursor: pointer;
+  }
+
+  .card-bg {
+    background-color: #fff;
+    width: 100%;
+  }
+  .back-icon {
+    position: absolute;
+  }
+}

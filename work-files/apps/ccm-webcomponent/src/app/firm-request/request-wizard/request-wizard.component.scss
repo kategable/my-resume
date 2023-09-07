@@ -1,0 +1,117 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+@import '../../../styles.scss';
+
+.request-wizard {
+  .actions-container {
+    display: flex;
+    position: relative;
+
+    ul {
+      position: absolute;
+      right: 0;
+    }
+  }
+
+  .button-icon {
+    left: -31px;
+    top: 8px;
+  }
+}
+// styles for ucf component
+body.modal-open {
+  overflow: hidden;
+}
+modal {
+  display: none;
+}
+modal .modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  overflow: auto;
+}
+modal .modal .modal-body {
+  background: #fff;
+  box-shadow: 0 0 8px #bbb;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+@media screen and (min-width: 1200px) {
+  modal .modal .modal-body {
+    margin: 15px auto;
+    max-width: 1300px;
+    min-width: 350px;
+  }
+}
+@media screen and (min-width: 1920px) {
+  modal .modal .modal-body {
+    margin: 25px auto;
+    max-width: 1950px;
+    min-width: 350px;
+  }
+}
+modal .modal-background {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #000;
+  opacity: 0.2;
+  z-index: 900;
+}
+#file-selection-modal {
+  font-size: 14px;
+  font-family: system-ui;
+  font-weight: 300;
+}
+#file-selection-modal .title {
+  color: #fff;
+  background-color: #004772;
+  font-weight: 400;
+  padding: 10px;
+}
+@media screen and (min-width: 1200px) {
+  #file-selection-modal .content-container {
+    height: 550px;
+    width: 1290px;
+  }
+}
+@media screen and (min-width: 1920px) {
+  #file-selection-modal .content-container {
+    height: 650px;
+    width: 1950px;
+  }
+}
+#file-selection-modal .footer {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 3px;
+  border-left: 2px solid #a9a9a9;
+}
+#file-selection-modal .footer button {
+  color: #0070b7;
+  font-size: 12px;
+  background-color: #fff;
+  border: 1px solid #0070b7;
+  border-radius: 3px;
+  padding: 8px 16px;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+#file-selection-modal .footer button:last-child {
+  margin-left: 15px;
+}
+#file-selection-modal .footer button.primary {
+  color: #fff;
+  background-color: #0070b7;
+}
+#file-selection-modal .footer button:disabled {
+  background-color: #ccc;
+  color: #666;
+}

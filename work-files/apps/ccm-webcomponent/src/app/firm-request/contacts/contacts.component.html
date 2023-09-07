@@ -1,0 +1,401 @@
+<ng-container *ngIf="viewModel$ | async as data">
+  <div class="p-3 contacts-container">
+    <form [formGroup]="envelopeForm">
+      <div class="flex flex-row mb-5">
+        <ng-container *ngIf="!data.isPublished || canChangeType">
+          <div class="basis-2/4 pr-2">
+            <label class="receipient-type-label">Recipient Selection *</label>
+            <finra-radio-group
+              id="recipientType"
+              [value]="data.contactsViewModel.recipientType"
+              direction="horizontal"
+              (change)="onRecipientTypeChange($event, data)"
+              required="true"
+            >
+              <finra-radio *ngIf="!data.transferInProgress" name="recipientType" value="FIRM" slot="item"
+                >Member Firm</finra-radio
+              >
+              <finra-radio *ngIf="data.transferInProgress" name="recipientType" value="FIRM" slot="item" disabled="true"
+                >Member Firm</finra-radio
+              >
+              <finra-radio name="recipientType" value="INDIVIDUAL" slot="item">Individual</finra-radio>
+            </finra-radio-group>
+          </div>
+          <div class="basis-2/4 pr-2" *ngIf="data.contactsViewModel.recipientType !== firmIndividualType.FIRM">
+            <finra-tooltip
+              position="above"
+              style="white-space: pre-line"
+              tooltiptext="Tagging a firm is for your reference of this request ONLY.
+						&#13;The firm tagged here will not be notified of this request. 
+						&#13;NOTE: If there are items that require a clearing firm this is required"
+            >
+              <finra-dropdown
+                label="Tag a Firm &#9432;"
+                style="white-space: nowrap"
+                placeholder="Select associated firm"
+                ngDefaultControl
+                [FormControl]="AssociatedFirmControl"
+                [selectedValue]="data.contactsViewModel.associatedFirm"
+                [selectedText]="data.contactsViewModel.associatedFirm | firmName"
+                (change)="onAssociatedFirmChange($event, data)"
+              >
+                <finra-dropdown-option [value]="emptyFirm" slot="option"
+                  >-- No associated firm --</finra-dropdown-option
+                >
+                <finra-dropdown-option *ngFor="let firm of data.firms" [value]="firm" slot="option">
+                  {{ firm.name }}
+                </finra-dropdown-option>
+              </finra-dropdown>
+            </finra-tooltip>
+          </div>
+        </ng-container>
+      </div>
+      <div *ngIf="data.isPublished && !data.transferInProgress" class="flex flex-row mb-5">
+        <div class="basis-2/4 pr-2">
+          <label class="receipient-type-label">Recipient (To) *</label>
+          <span class="pl-1 receipient-type-label font-bold"> {{ FirmControl.value?.name }} </span>
+          <span
+            class="pl-1 receipient-type-label font-bold"
+            *ngFor="let one of data.contactsViewModel.selectedIndividuals"
+          >
+            {{ one | emailOfContact }}
+          </span>
+          <div *ngIf="data.contactsViewModel.associatedFirm">
+            <span class="receipient-type-label">Associated with:</span>
+            <span class="pl-1 receipient-type-label font-bold">{{ data.contactsViewModel.associatedFirm.name }}</span>
+          </div>
+        </div>
+        <div *ngIf="data.showTransferButton" class="basis-1/4 pr-2">
+          <finra-button (click)="confirmTransfer()">Transfer</finra-button>
+          <app-transfer-confirmation
+            *ngIf="showTransferConfirmation"
+            (ok)="transfer(data)"
+            (cancel)="showTransferConfirmation = false"
+          ></app-transfer-confirmation>
+        </div>
+      </div>
+      <ng-container *ngIf="data.contactsViewModel.recipientType === firmIndividualType.FIRM; else individual">
+        <div class="flex flex-row mb-5">
+          <div class="basis-1/2 pr-4" *ngIf="!data.isPublished || data.transferInProgress">
+            <finra-dropdown
+              label="Recipient (To)"
+              required="true"
+              placeholder="Select associated firm"
+              ngDefaultControl
+              [FormControl]="FirmControl"
+              [selectedValue]="data.contactsViewModel.selectedFirm"
+              [selectedText]="data.contactsViewModel.selectedFirm | firmName"
+              [disabled]="FirmControl.disabled"
+              (change)="onFirmsChange($event, data)"
+              [error]="(FirmControl.dirty || FirmControl.touched) && !data.contactsViewModel.selectedFirm && 'Required'"
+            >
+              <finra-dropdown-option *ngFor="let firm of data.firms" [value]="firm" slot="option">
+                {{ firm.name }}
+              </finra-dropdown-option>
+            </finra-dropdown>
+          </div>
+          <div class="basis-1/2 pr-2">
+            <finra-dropdown
+              label="Recipient (CC) *"
+              placeholder="Select contacts"
+              ngDefaultControl
+              [FormControl]="FirmCCControl"
+              (change)="onSelectedFirmsCCChange($event, data.contactsViewModel)"
+              [error]="
+                (FirmCCControl.dirty || FirmCCControl.touched) &&
+                data.contactsViewModel.selectedContactsForFirm.length === 0 &&
+                'Required'
+              "
+            >
+              <finra-dropdown-option
+                *ngFor="let extContact of data.contactsViewModel.contactsForFirm"
+                [value]="extContact"
+                slot="option"
+              >
+                {{ extContact | contactformat }}
+              </finra-dropdown-option>
+            </finra-dropdown>
+
+            <div>
+              <span
+                class="selected-contact relative pr-8 pt-3 pl-3 pb-3"
+                [title]="extContact | emailOfContact"
+                *ngFor="let extContact of data.contactsViewModel.selectedContactsForFirm; let i = index"
+              >
+                {{ extContact | contactformat }}
+                <finra-icon
+                  slot="icon"
+                  icon="Times"
+                  family="light"
+                  size="xs"
+                  class="absolute remove-icon cursor-pointer"
+                  (click)="onRemoveExternalContactsForFirm(i, data.contactsViewModel)"
+                ></finra-icon>
+              </span>
+            </div>
+          </div>
+          <div class="w-16 align-middle pt-9">
+            <ng-container *ngIf="loadingIndicator$ | async; else addExternalTemplate">
+              <div class="-mt-6 -ml-12">
+                <finra-spinner size="sm" [isBackdrop]="false"></finra-spinner>
+              </div>
+            </ng-container>
+            <ng-template #addExternalTemplate>
+              <span title="Add Contact" (click)="showAddNewContactDialog = true" class="relative cursor-pointer">
+                <finra-icon slot="icon" icon="PlusCircle" size="sm" family="light" class="plus-icon"></finra-icon>
+              </span>
+            </ng-template>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #individual>
+        <div class="flex flex-row mb-5">
+          <div *ngIf="!data.isPublished || data.transferInProgress" class="basis-1/2 pr-4">
+            <finra-dropdown
+              label="Recipient (To) *"
+              placeholder="Select associated individual"
+              ngDefaultControl
+              [formControl]="IndividualControl"
+              (change)="onIndividualChange($event, data.contactsViewModel)"
+              [error]="
+                (IndividualControl.dirty || IndividualControl.touched) &&
+                data.contactsViewModel.selectedIndividuals.length === 0 &&
+                'Required'
+              "
+            >
+              <finra-dropdown-option *ngFor="let person of data.individuals" [value]="person" slot="option">
+                {{ person | contactformat }}
+              </finra-dropdown-option>
+            </finra-dropdown>
+            <div>
+              <span
+                class="selected-contact relative pr-8 pt-3 pl-3 pb-3"
+                [title]="a | emailOfContact"
+                *ngFor="let a of data.contactsViewModel.selectedIndividuals; let i = index"
+              >
+                {{ a | contactformat : false }}
+                <finra-icon
+                  slot="icon"
+                  icon="Times"
+                  size="sm"
+                  family="light"
+                  size="xs"
+                  class="absolute remove-icon cursor-pointer"
+                  *ngIf="!data.isPublished || data.transferInProgress"
+                  (click)="removeSelectedIndividuals(i, data.contactsViewModel)"
+                ></finra-icon>
+              </span>
+            </div>
+          </div>
+          <div class="basis-1/2 pr-2">
+            <finra-dropdown
+              label="Recipient (CC) *"
+              placeholder="Select contacts"
+              ngDefaultControl
+              [FormControl]="IndividualCCControl"
+              (change)="onSelectedIndividualCCChange($event, data.contactsViewModel)"
+              [error]="
+                (IndividualCCControl.dirty || IndividualCCControl.touched) &&
+                data.contactsViewModel.selectedContactsForIndividual.length === 0 &&
+                'Required'
+              "
+            >
+              <finra-dropdown-option *ngFor="let person of data.individuals" [value]="person" slot="option">
+                {{ person | contactformat }}
+              </finra-dropdown-option>
+            </finra-dropdown>
+
+            <div>
+              <span
+                class="selected-contact relative pr-8 pt-3 pl-3 pb-3"
+                [title]="extContact | emailOfContact"
+                *ngFor="let extContact of data.contactsViewModel.selectedContactsForIndividual; let i = index"
+              >
+                {{ extContact | contactformat : false }}
+                <finra-icon
+                  slot="icon"
+                  icon="Times"
+                  family="light"
+                  size="xs"
+                  *ngIf="!data.isPublished || data.transferInProgress"
+                  class="absolute remove-icon cursor-pointer"
+                  (click)="removeExtContactsForIndividual(i, data.contactsViewModel)"
+                ></finra-icon>
+              </span>
+            </div>
+          </div>
+          <div class="w-16 align-middle pt-9">
+            <span (click)="showAddNewContactDialog = true" class="relative">
+              <finra-icon slot="icon" icon="PlusCircle" size="sm" family="light" class="plus-icon"></finra-icon>
+            </span>
+          </div>
+        </div>
+      </ng-template>
+      <div class="flex flex-row mb-6">
+        <div class="basis-1/2 pr-4">
+          <finra-dropdown
+            label="FINRA Contact *"
+            placeholder="Select FINRA contacts"
+            ngDefaultControl
+            [FormControl]="InternalContactControl"
+            [disabled]="InternalContactControl.disabled"
+            (change)="onInternalContactSelect($event, data.contactsViewModel)"
+            [error]="
+              (InternalContactControl.dirty || InternalContactControl.touched) &&
+              data.contactsViewModel.selectedStaffs.length === 0 &&
+              'Required'
+            "
+          >
+            <finra-dropdown-option *ngFor="let intContact of data.staff" [value]="intContact" slot="option">
+              {{ intContact | staffformat }}
+            </finra-dropdown-option>
+          </finra-dropdown>
+          <div>
+            <span
+              class="selected-contact relative pr-8 pt-3 pl-3 pb-3"
+              [title]="intContact | emailOfStaff"
+              *ngFor="let intContact of data.contactsViewModel.selectedStaffs; let i = index"
+            >
+              {{ intContact | staffformat }}
+              <finra-icon
+                *ngIf="!InternalContactControl.disabled"
+                slot="icon"
+                icon="Times"
+                size="sm"
+                family="light"
+                size="xs"
+                class="absolute remove-icon cursor-pointer"
+                (click)="onRemoveInternalContact(i, data.contactsViewModel)"
+              ></finra-icon>
+            </span>
+          </div>
+        </div>
+        <div class="w-16 align-middle pt-9">
+          <ng-container *ngIf="loadingIndicator$ | async; else addTemplate">
+            <div class="-mt-6 -ml-12">
+              <finra-spinner size="sm" [isBackdrop]="false"></finra-spinner>
+            </div>
+          </ng-container>
+          <ng-template #addTemplate>
+            <span title="Add Contact" (click)="showAdditionalContactDialog = true" class="relative cursor-pointer">
+              <finra-icon slot="icon" icon="PlusCircle" size="sm" family="light" class="plus-icon"></finra-icon>
+            </span>
+          </ng-template>
+        </div>
+      </div>
+
+      <ng-container *ngIf="!data.isPublished; else attachments">
+        <div class="flex flex-row mb-5">
+          <div class="basis-1/7 pr-2 pt-10">
+            <finra-checkbox
+              [value]="IncludeContactInfoControl.value"
+              name="selectItem"
+              ngDefaultControl
+              [FormControl]="IncludeContactInfoControl"
+              (change)="onDraftChange($event, IncludeContactInfoControl, data.contactsViewModel)"
+              label="Include Sender Information"
+            >
+            </finra-checkbox>
+          </div>
+        </div>
+        <div class="flex flex-row mb-5">
+          <div class="basis-1/6 pr-2">
+            <finra-input-text
+              id="phoneNumber"
+              label="Phone Number"
+              ngDefaultControl
+              [FormControl]="PhoneNumberControl"
+              [value]="PhoneNumberControl.value"
+              [disabled]="PhoneNumberControl.disabled"
+              [error]="
+                (PhoneNumberControl.dirty || PhoneNumberControl.touched) &&
+                PhoneNumberControl.invalid &&
+                'Provide valid 10 digits phone number'
+              "
+              (change)="onDraftChange($event, PhoneNumberControl, data.contactsViewModel)"
+            ></finra-input-text>
+          </div>
+          <div class="basis-1/7 pr-2">
+            <finra-input-text
+              id="extension"
+              label="Extension"
+              ngDefaultControl
+              [FormControl]="ExtensionControl"
+              [disabled]="ExtensionControl.disabled"
+              [value]="ExtensionControl.value"
+              (change)="onDraftChange($event, ExtensionControl, data.contactsViewModel)"
+            ></finra-input-text>
+          </div>
+          <div class="basis-1/5 pr-2">
+            <finra-input-text
+              id="email"
+              label="Email"
+              ngDefaultControl
+              [FormControl]="EmailControl"
+              [disabled]="EmailControl.disabled"
+              [value]="EmailControl.value"
+              (change)="onDraftChange($event, EmailControl, data.contactsViewModel)"
+              [error]="
+                (EmailControl.dirty || EmailControl.touched) &&
+                EmailControl.invalid &&
+                'Provide valid (finra.org) email'
+              "
+            ></finra-input-text>
+          </div>
+        </div>
+        <ng-template *ngTemplateOutlet="attachments; context: { $implicit: data }"></ng-template>
+        <div class="flex flex-row mb-5">
+          <div class="basis-2/4 pr-2">
+            <finra-input-text
+              id="subject"
+              ngDefaultControl
+              [FormControl]="EmailSubjectEditableControl"
+              (change)="onDraftChange($event, EmailSubjectEditableControl, data.contactsViewModel)"
+              [value]="EmailSubjectEditableControl.value"
+              [label]="data.contactsViewModel.emailSubjectPrepend || 'Subject'"
+              [error]="
+                (EmailSubjectEditableControl.dirty || EmailSubjectEditableControl.touched) &&
+                EmailSubjectEditableControl.invalid &&
+                'Required'
+              "
+              class="mb-5"
+            ></finra-input-text>
+
+            <finra-rich-text-editor
+              ngDefaultControl
+              [FormControl]="NotificationMsgControl"
+              class="mt-5"
+              [editorStyle]="editorStyle"
+              (textChange)="editorChange($event, data.contactsViewModel)"
+              [editorModules]="editorModules"
+              [htmlText]="NotificationMsgControl.value"
+              [readOnly]="data.isPublished"
+            ></finra-rich-text-editor>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #attachments>
+        <div class="flex flex-row mb-5">
+          <div class="basis-2/4 pr-2 relative">
+            <app-attachments
+              [model]="data.contactsViewModel.lstAttachments"
+              [isPublished]="data.isPublished"
+              [templateId]="data.templateId"
+            ></app-attachments>
+          </div>
+        </div>
+      </ng-template>
+    </form>
+    <app-additional-recipient-dialog
+      *ngIf="showAddNewContactDialog"
+      (onAddContact)="onAdditionalRecipient($event, data.contactsViewModel)"
+      (onClose)="showAddNewContactDialog = false"
+    ></app-additional-recipient-dialog>
+
+    <app-additional-contact-dialog
+      *ngIf="showAdditionalContactDialog"
+      (onAddContacts)="onAddAdditionalContacts($event, data.contactsViewModel)"
+      (onClose)="showAdditionalContactDialog = false"
+    ></app-additional-contact-dialog>
+  </div>
+</ng-container>

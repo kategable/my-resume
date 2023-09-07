@@ -1,0 +1,102 @@
+<section id="grid-utilities">
+  <div id="filters">
+    <div class="filter">
+      <label for="search-by">Search</label>
+      <input
+        type="input"
+        placeholder="Type to search..."
+        name="search-by"
+        id="search-by"
+        (input)="onFilterTextBoxChanged($event)"
+      />
+    </div>
+  </div>
+  <finra-button (click)="openCreateEnvelopeModal($event)">Create</finra-button>
+  <input #outboxSelectEnvelopeJson type="file" style="display: none" (change)="onSelectEnvelopeJson($event)" />
+</section>
+
+<ag-grid-angular
+  style="width: 100%; height: 500px"
+  class="ag-theme-alpine"
+  [masterDetail]="true"
+  [getRowHeight]="getRowHeight"
+  [detailCellRenderer]="detailCellRenderer"
+  [rowModelType]="rowModelType"
+  [columnDefs]="columnDefs"
+  [defaultColDef]="defaultColDef"
+  [rowData]="rowData"
+  [cacheQuickFilter]="true"
+  [cacheBlockSize]="paginationPageSize"
+  [pagination]="true"
+  [paginationPageSize]="paginationPageSize"
+  [rowSelection]="rowSelection"
+  (rowClicked)="rowClicked($event)"
+  (rowGroupOpened)="onRowGroupOpened($event)"
+  (gridReady)="onGridReady($event)"
+  [suppressCellFocus]="true"
+></ag-grid-angular>
+
+<ng-container *ngIf="showOpenCreateEnvelopeModal">
+  <ng-container *ngIf="requestTemplates$ | async as requestTemplates">
+    <finra-modal
+      [flexModal]="true"
+      [backDrop]="true"
+      size="md"
+      theme="info"
+      show-close-icon="true"
+      (close)="onCloseDialog()"
+    >
+      <div slot="title">Request Template Select</div>
+      <div class="modal-content">
+        <div class="desc">Select a recommended template or select all to view a full list.</div>
+        <finra-radio-group
+          id="criteria"
+          [value]="selectedCriteria"
+          direction="horizontal"
+          (change)="onCriteriaChange($event)"
+        >
+          <finra-radio name="criteria" value="recommended" slot="item">Recommended</finra-radio>
+          <finra-radio name="criteria" value="all" slot="item">All</finra-radio>
+        </finra-radio-group>
+        <finra-dropdown
+          label="Request Template"
+          required="true"
+          placeholder="Select"
+          (change)="onTemplateSelect($event)"
+        >
+          <finra-dropdown-option
+            class="template-option"
+            slot="option"
+            *ngFor="
+              let template of selectedCriteria === 'all' ? requestTemplates.relevant : requestTemplates.recommended;
+              let index = index
+            "
+            [value]="template"
+            >{{ template.name }}</finra-dropdown-option
+          >
+        </finra-dropdown>
+        <div class="modal-actions">
+          <finra-button slot="commands" theme="secondary" (onclick)="cancelCreateEnvelope()">Cancel</finra-button>
+          <finra-button
+            slot="commands"
+            theme="primary"
+            (onclick)="createEnvelope()"
+            class="ml-5"
+            [disabled]="!selectedTemplate"
+            >Apply</finra-button
+          >
+        </div>
+      </div>
+    </finra-modal>
+  </ng-container>
+</ng-container>
+
+<finra-modal *ngIf="featureNotReady" [flexModal]="true" [backDrop]="true" size="md" theme="info">
+  <div slot="title">Feature Not Ready</div>
+  <div class="modal-content">
+    <div class="desc">This feature isn't currently ready.</div>
+    <div class="modal-actions">
+      <finra-button slot="commands" theme="secondary" (onclick)="closeFeatureNotReadyModal()">Close</finra-button>
+    </div>
+  </div>
+</finra-modal>

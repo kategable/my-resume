@@ -1,0 +1,82 @@
+export const WEB_COMPONENT_SCHEMA = {
+  contacts: [
+    {
+      crdId: '39345',
+      name: 'A & M SECURITIES, LLC',
+      category: 'FIRM',
+      contactType: ['Potential Respondent'],
+      primaryFlag: true,
+      businessEmail: [],
+    },
+    {
+      crdId: '2612186',
+      name: 'A JANSSEN LONGENECKER',
+      category: 'INDIVIDUAL',
+      contactType: [],
+      primaryFlag: true,
+      businessEmail: [],
+    },
+    {
+      crdId: '112422',
+      name: 'EDWARD JONES',
+      category: 'BRANCH',
+      contactType: [],
+      primaryFlag: false,
+      businessEmail: [],
+    },
+    {
+      crdId: '',
+      name: 'John Doe',
+      category: 'UNREGISTERED_INDIVIDUAL',
+      contactType: ['Consultant'],
+      primaryFlag: false,
+      businessEmail: ['john.doe@sample.com'],
+    },
+    {
+      crdId: '',
+      name: 'Sample Inc.',
+      category: 'UNREGISTERED_ORGANIZATION',
+      contactType: ['Floor Broker'],
+      primaryFlag: false,
+      businessEmail: ['contact@sample.com'],
+    },
+  ],
+  staffs: [
+    {
+      userId: 'K31038',
+      fullName: 'Todd Smith',
+      primaryFlag: true,
+      role: 'Supervisor',
+    },
+    {
+      userId: 'K31038',
+      fullName: 'Todd Smith',
+      primaryFlag: true,
+      role: 'Manager',
+    },
+    {
+      userId: 'K31038',
+      fullName: 'Todd Smith',
+      primaryFlag: true,
+      role: 'Analyst',
+    },
+    {
+      userId: 'K22394',
+      fullName: 'Socrates Geetha Sambandam',
+      primaryFlag: false,
+      role: 'Supervisor',
+    },
+    {
+      userId: 'K22394',
+      fullName: 'Socrates Geetha Sambandam',
+      primaryFlag: false,
+      role: 'Manager',
+    },
+    {
+      userId: 'K22394',
+      fullName: 'Socrates Geetha Sambandam',
+      primaryFlag: false,
+      role: 'Analyst',
+    },
+  ],
+};
