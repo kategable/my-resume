@@ -1,0 +1,23 @@
+   Node   : 16.20.2
+   OS     : win32-x64
+   npm    : 8.19.4
+
+   nx (global)    : 16.8.1
+   nx             : 16.8.1
+   @nx/js         : 16.8.1
+   @nx/jest       : 16.8.1
+   @nx/linter     : 16.8.1
+   @nx/workspace  : 16.8.1
+   @nx/angular    : 16.8.1
+   @nx/cypress    : 16.8.1
+   @nx/devkit     : 16.8.1
+   @nrwl/tao      : 16.8.1
+   @nx/web        : 16.8.1
+   @nx/webpack    : 16.8.1
+   nx-cloud       : 16.4.0
+   typescript     : 5.1.6
+   ---------------------------------------
+   Community plugins:
+   @ngrx/effects        : 16.2.0
+   @ngrx/store          : 16.2.0
+   @ngrx/store-devtools : 16.2.0
