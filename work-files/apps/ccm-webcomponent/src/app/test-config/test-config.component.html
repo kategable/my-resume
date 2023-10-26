@@ -1,9 +1,0 @@
-<div id="config-form">
-  <label>Config:</label>
-  <div>
-    <finra-alert *ngIf="jsonError" theme="error">Invalid JSON {{ jsonError }}</finra-alert>
-    <textarea (keyup)="keyUp($event)" type="text">{{ config | json }}</textarea>
-  </div>
-  <span></span>
-  <button (click)="updateConfig()">Update</button>
-</div>
