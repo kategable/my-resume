@@ -1,73 +1,70 @@
-# KATE GABEL
-| Buffalo Grove, IL | [LinkedIn](https://www.linkedin.com/in/kategable/) | [LinkTree](https://linktr.ee/katalina.code) |
+# **KATE GABEL**  
+📍 *Buffalo Grove, IL* | [LinkedIn](https://www.linkedin.com/in/kategable/) | [LinkTree](https://linktr.ee/katalina.code)
 
+## **IT CONSULTANT ♦ DEVELOPER ♦ SENIOR TECHNICAL ARCHITECT**  
+🚀 *25+ years of experience in software development, architecture, and technical leadership*  
 
+### **Expert in Full-Stack Development & Front-End Architecture**  
+- Highly skilled in **Angular** (Expert Level, Speaker at Major Angular Conference 2022)  
+- Experienced in **JavaScript, C#, SQL, TypeScript**  
+- Published **popular blog content** on **NgRx State Management**  
+- Proven ability to **architect and deliver** scalable solutions  
 
-### IT CONSULTANT ♦ DEVELOPER ♦ SENIOR TECHNICAL ARCHITECT
-***
-### _25 years of successful programming and architecting software experience_
-***
-### Highly knowledgeable Programmer/Architect with extensive background in many different areas of software development. Fullstack as well as frontend. Expert Angular developer. Presented at a major Angular conference in 2022. Created popular blog content for ngrx state management
-***
-### SUMMARY OF QUALIFICATIONS
+---
 
-- Programming Languages JavaScript, C#, SQL, Typescript
+## **SUMMARY OF QUALIFICATIONS**  
 
-- Databases: MS SQL Server,Azure Sql Db services, MongoDB, RavenDB, CouchDB, Oracle7.3/8.0, MS Access
+- **Programming Languages:** JavaScript, C#, SQL, TypeScript  
+- **Databases:** MS SQL Server, Azure SQL, MongoDB, RavenDB, CouchDB, Oracle 7.3/8.0, MS Access  
+- **Operating Systems:** Windows (10, 7, NT, XP, 2000, Vista), Unix SVR4, MS/PC DOS  
+- **Data Access Technologies:** Dapper, LINQ, Entity Framework, NHibernate, ADO.NET, RDO, DAO, ODBC Direct  
+- **Additional Expertise:** .NET, .NET Core, APIs, Azure, Angular 2+, Microservices, OOP, SOLID Principles  
 
-- Operations Systems: MS Windows 10/7/NT/2000/XP/Vista, Unix SVR4, MS/PC DOS
+---
 
-- Data Access Technologies: Dapper,LINQ, EFW, NHibernate, ADO.Net, RDO, DAO, ODBC Direct
+## **PROFESSIONAL EXPERIENCE**  
 
-- Additional IT Knowledge: .Net, .Net Core, Api,Azure, Angular 2+, Microservices, OOP, SOLID Principles
+### **PRESIDENT & SENIOR IT CONSULTANT**  
+**CSA Technologies Inc. | Buffalo Grove, IL | 03/2009 – Present**  
 
-## PROFESSIONAL EXPERIENCE
+- Lead **Angular consulting** projects as a **Software Architect & Tech Lead**  
+- Design, develop, and implement **world-class front-end applications**  
+- Align **technical solutions with business objectives**  
+- Define and execute **migration strategies** for legacy systems  
+- **Integrate third-party systems** into enterprise solutions  
+- Deliver **high-visibility web applications** for government and enterprise clients  
 
-> PRESIDENT & SENIOR IT CONSULTANT
+---
 
- > CSA Technologies Inc., Buffalo Grove, IL
+## **CONTRACT EXPERIENCE**  
 
- > 03/2009 - present
+| **Role** | **Company** | **Dates** | **Location** |
+|---------|------------|---------|------------|
+| **Angular Consultant** | HeroDevs | 01/2022 – 2024 | Remote |
+| **Principal Consultant Architect** | AON | 05/2019 – 12/2021 | Lincolnshire, IL / Remote |
+| **Principal Consultant Tech Lead** | CDW | 10/2017 – 05/2019 | Vernon Hills, IL |
+| **Consultant Developer (C2C)** | 3D Exhibits | 02/2016 – 08/2017 | Schaumburg, IL |
+| **Full-Stack Developer** | SNC | 09/2012 – 02/2016 | Sparks, NV |
+| **Full-Stack Developer** | SurePayroll.com | 07/2012 – 09/2012 | Glenview, IL |
+| **Full-Stack Developer** | Uline.com | 02/2012 – 07/2012 | Pleasant Prairie, WI |
+| **Full-Stack Developer** | IPC.org | 01/2012 – 02/2012 | Bannockburn, IL |
+| **Full-Stack Developer** | Cision | 07/2011 – 12/2011 | Chicago, IL |
+| **Senior Technical Architect** | ExtendASP Inc. | 12/2010 – 06/2011 | Highland Park, IL |
+| **Senior Developer** | Stericycle Inc. | 05/2009 – 12/2010 | Lake Forest, IL |
 
-1. Angular consulting as a software architect and a tech lead developer creating world class front-end applications.
+---
 
-2. Led the conceptual design, development, implementation, enhancement, training and utilization of produced systems.
+## **ADDITIONAL RELEVANT EXPERIENCE**  
 
-3. Deliver high-quality solutions to business owners to ensure alignment of technical solutions with business objectives.
+| **Role** | **Company** | **Dates** |
+|---------|------------|---------|
+| **Team Lead / Senior Developer** | Dish Pro Inc., Northbrook, IL | 03/2004 – 05/2009 |
+| **Systems Analyst** | APAC, Deerfield, IL | 07/2000 – 03/2004 |
+| **Software Engineer** | ISI, Schaumburg, IL | 04/1998 – 08/2000 |
 
-4. Define and implement strategies for integration of 3rd party systems into the business and technical architectures.
+---
 
-5. Define and implement migration strategies from outdated systems to new architecture and technologies.
+## **EDUCATION**  
 
-6. Work in internal high visibility web applications and web service applications for the company that contracts with the government.
-
-| Role | Company | Dates | Location
-| ------ | ---------- | ---------|------|
-| ANGULAR CONSULTANT (CONTRACT) | HERODEVS | 01/2022 - 2024 | remote |
-| PRINCIPAL CONSULTANT ARCHITECT (CONTRACT)| AON | 05/2019 - 12/2021| Lincolnshire, IL/remote |
-| PRINCIPAL CONSULTANT TECH LEAD (CONTRACT)| CDW | 10/2017 - 05/2019| Vernon Hills, IL |
-| CONSULTANT DEVELOPER (CONTRACT C2C) | 3D Exhibits | 02/2016 - 8/2017 | Schaumburg, IL |
-| FULL-STACK DEVELOPER | SNC | 09/2012 - 02/2016| Sparks, NV |
-| FULL-STACK DEVELOPER | Surepayroll.com | 07/2012 -- 09/2012| Glenview, IL |
-| FULL-STACK DEVELOPER | Uline.com  | 02/2012 -- 07/2012 | Pleasant Prairie, WI |
-| FULL-STACK DEVELOPER | IPC.org  | 01/2012 -- 02/2012|  Bannockburn IL |
-|  FULL-STACK DEVELOPER | Cision | 07/2011 -- 12/2011 | Chicago, IL |
-| SENIOR TECHNICAL ARCHITECT (FT)|  ExtendASP Inc. | 12/2010 -- 06/2011 | Highland Park, IL|
-| SENIOR DEVELOPER (CTH - FT) | Stericycle Inc. | 05/2009 -- 12/2010 | Lake Forest, IL |
-
-
-### ADDITIONAL RELEVANT EXPERIENCE
-
-| Role | Company | Dates
-| ------ | ------ | ---------|
-| TEAM LEAD / SENIOR DEVELOPER | Dish Pro Inc. Northbrook, IL | 03/2004 – 05/2009| 
-| SYSTEMS ANALYST | APAC, Deerfield, IL | 07/2000 – 03/2004 |
-| SOFTWARE ENGINEER | ISI, Schaumburg, IL | 04/1998 – 08/2000
-
- 
-
-### EDUCATION
-
-> BACHELOR OF SCIENCE IN COMPUTER SOFTWARE
-
-> Kiev Politechnical Institute: Kiev, Ukraine
+🎓 **Bachelor of Science in Computer Software**  
+*Kiev Polytechnic Institute | Kiev, Ukraine*  
