@@ -1,7 +1,7 @@
-# KATE SKY
+# KATE GABEL
 
-| Buffalo Grove, IL | [LinkedIn](www.linkedin.com/in/katesky) | [LinkTree](https://linktr.ee/Katesky)|
-| ------ | ------ |-------|
+| Buffalo Grove, IL | <a href="https://www.linkedin.com/in/kategable/" target="_blank" rel="noopener noreferrer">LinkedIn</a> | <a href="https://linktr.ee/katalina.code" target="_blank" rel="noopener noreferrer">LinkTree</a> |
+
 
 ### IT CONSULTANT ♦ DEVELOPER ♦ SENIOR TECHNICAL ARCHITECT
 ***
