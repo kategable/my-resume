@@ -43,7 +43,7 @@
 
 | Role | Company | Dates | Location
 | ------ | ---------- | ---------|------|
-| ANGULAR CONSULTANT (CONTRACT) | HERODEVS | 01/2022 - PRESENT | remote |
+| ANGULAR CONSULTANT (CONTRACT) | HERODEVS | 01/2022 - 2024 | remote |
 | PRINCIPAL CONSULTANT ARCHITECT (CONTRACT)| AON | 05/2019 - 12/2021| Lincolnshire, IL/remote |
 | PRINCIPAL CONSULTANT TECH LEAD (CONTRACT)| CDW | 10/2017 - 05/2019| Vernon Hills, IL |
 | CONSULTANT DEVELOPER (CONTRACT C2C) | 3D Exhibits | 02/2016 - 8/2017 | Schaumburg, IL |
