@@ -1,6 +1,6 @@
 # KATE GABEL
+| Buffalo Grove, IL | [LinkedIn](https://www.linkedin.com/in/kategable/) | [LinkTree](https://linktr.ee/katalina.code) |
 
-| Buffalo Grove, IL | <a href="https://www.linkedin.com/in/kategable/" target="_blank" rel="noopener noreferrer">LinkedIn</a> | <a href="https://linktr.ee/katalina.code" target="_blank" rel="noopener noreferrer">LinkTree</a> |
 
 
 ### IT CONSULTANT ♦ DEVELOPER ♦ SENIOR TECHNICAL ARCHITECT
